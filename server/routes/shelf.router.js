@@ -13,7 +13,6 @@ router.get("/", (req, res) => {
   pool
     .query(sqlText)
     .then((result) => {
-      console.log("executing GET, result is", result);
       res.send(result.rows);
     })
     .catch((err) => {
@@ -70,7 +69,20 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
 /**
  * Update an item if it's something the logged in user added
  */
-router.put("/:id", (req, res) => {
+router.put("/:id", rejectUnauthenticated, (req, res) => {
+  const queryText = `UPDATE item SET description = $1 WHERE id = $2 AND user_id = $3`;
+
+  const queryParams = [req.body.payload, req.params.id, req.user.id];
+
+  pool
+    .query(queryText, queryParams)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.log("Error executing SQL query", queryText, " : ", err);
+      res.sendStatus(500);
+    });
   // endpoint functionality
 });
 

@@ -32,10 +32,23 @@ function* deleteShelf(action) {
   }
 }
 
+function* editShelf(action) {
+  try {
+    console.log("in edit shelf, action is,", action);
+    yield axios.put(`/api/shelf/${action.payload.id}`, {
+      payload: action.payload.description,
+    });
+    yield put({ type: "FETCH_SHELF" });
+  } catch (error) {
+    console.log("User PUT request failed", error);
+  }
+}
+
 function* shelfSaga() {
   yield takeEvery("FETCH_SHELF", fetchShelf);
   yield takeEvery("POST_SHELF", postShelf);
   yield takeEvery("DELETE_FROM_SHELF", deleteShelf);
+  yield takeEvery("EDIT_SHELF", editShelf);
 }
 
 export default shelfSaga;
