@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShelfItem from "../ShelfItem/ShelfItem";
+import "./ShelfList.css";
 
 function ShelfList() {
   const dispatch = useDispatch();
