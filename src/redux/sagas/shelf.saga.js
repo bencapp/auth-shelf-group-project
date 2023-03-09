@@ -15,12 +15,28 @@ function* fetchShelf() {
 
 function* postShelf(action) {
   try {
-    yield axios.post("/api/shelf", { payload: action.payload });
-    yield put({ type: "SET_SHELF" });
+    yield axios.post("/api/shelf", action.payload);
+    yield put({ type: "FETCH_SHELF" });
   } catch (error) {
     console.log("User post request failed", error);
   }
 }
+
+// function* postItem() {
+//     yield takeLatest("POST_ITEM", addItem);
+//   }
+
+//   //WORKER SAGA
+//   function* addItem(action) {
+//     try {
+//       yield axios.post("/api/shelf", action.payload);
+//       // yield put({
+//       //   type: "FETCH_ITEMS",
+//       // });
+//     } catch (error) {
+//       console.log(`error in addItem`, error);
+//     }
+//   }
 
 function* deleteShelf(action) {
   try {
