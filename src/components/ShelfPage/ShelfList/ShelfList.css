@@ -1,0 +1,5 @@
+.shelf-list-style {
+  display: flex;
+  flex-flow: wrap;
+  gap: 2%;
+}

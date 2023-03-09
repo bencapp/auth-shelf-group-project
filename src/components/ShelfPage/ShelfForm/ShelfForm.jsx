@@ -27,7 +27,7 @@ function ShelfPage() {
       <button
         onClick={() => {
           dispatch({
-            type: "POST_ITEM",
+            type: "POST_SHELF",
             payload: itemToSend,
           });
         }}
