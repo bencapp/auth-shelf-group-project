@@ -24,8 +24,9 @@ function* postShelf(action) {
 
 function* deleteShelf(action) {
   try {
-    yield axios.delete(`/api/shelf${action.payload.id}`);
-    yield put({ type: "SET_SHELF" });
+    console.log("action.payload", action.payload);
+    yield axios.delete(`/api/shelf/${action.payload}`);
+    yield put({ type: "FETCH_SHELF" });
   } catch (error) {
     console.log("User delete request failed", error);
   }
