@@ -5,6 +5,7 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* fetchShelf() {
   try {
+    console.log("in fetchShelf");
     const response = yield axios.get("/api/shelf");
     yield put({ type: "SET_SHELF", payload: response.data });
   } catch (error) {
